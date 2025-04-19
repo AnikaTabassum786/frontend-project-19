@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router';
+import { FaShoppingCart } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
 
 const Navbar = () => {
     return (
@@ -8,15 +10,15 @@ const Navbar = () => {
                 <div className="flex-1">
                     <a className="text-xl">FlagshipFaceOff</a>
                 </div>
-                <div className="flex justify-center gap-4">
+                <div className="flex justify-center items-center gap-4">
 
                     <NavLink className={({ isActive }) => isActive ? "active text-blue-400" : ""} to="/"> Home </NavLink>
 
                     <NavLink className={({ isActive }) => isActive ? "active text-blue-400" : ""} to="/about">About</NavLink>
 
-                    <NavLink className={({ isActive }) => isActive ? "active text-blue-400" : ""} to="/cart"> Cart </NavLink>
+                    <NavLink className={({ isActive }) => isActive ? "active text-blue-400" : ""} to="/cart"> <FaShoppingCart /> </NavLink>
                     
-                    <NavLink className={({ isActive }) => isActive ? "active text-blue-400" : ""} to="/favorites">Favorites</NavLink>
+                    <NavLink className={({ isActive }) => isActive ? "active text-blue-400" : ""} to="/favorites"><FaBookmark /></NavLink>
 
                 </div>
             </div>
