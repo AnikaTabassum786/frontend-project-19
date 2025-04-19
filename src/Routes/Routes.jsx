@@ -1,0 +1,38 @@
+import React, { Component } from 'react';
+import {
+    createBrowserRouter,
+  } from "react-router";
+import Root from '../pages/Root/Root';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
+
+import About from '../pages/About/About';
+import Home from '../pages/Home/Home';
+import Cart from '../pages/Cart/Cart';
+import Favorites from '../pages/Favorites/Favorites';
+
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        path:'/',
+        Component:Home
+      },
+      {
+        path:'/about',
+        Component:About
+      },
+      {
+        path:'/cart',
+        Component:Cart
+      },
+      {
+        path:'/favorites',
+        Component:Favorites
+      }
+    ]
+  }
+]);
