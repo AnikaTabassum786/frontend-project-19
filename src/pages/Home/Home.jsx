@@ -1,7 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import bannerImg from '../../assets/images/banner.png'
+import PhonesContainer from '../../components/PhonesContainer';
+import { useLoaderData } from 'react-router';
 
 const Home = () => {
+    const data = useLoaderData()
+    // console.log(data)
+
+    const [searchText, setSearchText] = useState('')
+    const [phones,setPhones] = useState(data)
+    console.log(searchText)
+    // const handleSearch = ( e,text )=>{
+    //    e.preventDefault()
+    //    const searchedPhone = data.filter(phone=>
+    //     phone?.name?.toLowerCase().split(' ').includes(text.toLowerCase()) ||
+    //     phone?.brand?.toLowerCase().split(' ').includes(text.toLowerCase())
+    //    )
+    //    console.log(text)
+    //    setPhones(searchedPhone)
+    // }
+    const handleSearch = (e) => {
+        e.preventDefault();
+    
+        const text = searchText.trim().toLowerCase();
+    
+        if (text === '') {
+            setPhones(data); // Reset to all if input is empty
+            return;
+        }
+    
+        const searchedPhone = data.filter(phone =>
+            phone?.name?.toLowerCase().includes(text) ||
+            phone?.brand?.toLowerCase().includes(text)
+        );
+    
+        setPhones(searchedPhone);
+        setSearchText('')
+    };
+    
+
     return (
         <div className='container mx-auto'>
             <div className='flex flex-col justify-center items-center'>
@@ -11,29 +48,22 @@ const Home = () => {
             </div>
 
             {/* Search */}
-           <div className='flex justify-center items-center mt-4'>
-              <div className='flex gap-4'>
-              <label className="input ">
-
-<svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <g
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        strokeWidth="2.5"
-        fill="none"
-        stroke="currentColor"
-    >
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.3-4.3"></path>
-    </g>
-</svg>
-<input type="search" required placeholder="Search" />
-           </label>
-            <div>
-                <button className='btn'>Search</button>
+            <div className='flex justify-center items-center mt-4'>
+                <div>
+                <form  onSubmit={handleSearch} className='flex gap-4'>
+                   
+                        <input 
+                        value={searchText}
+                        onChange={e=>setSearchText(e.target.value)}
+                        type="search" placeholder='Search' className='border-2 border-gray-200' />
+                        <div>
+                            <button type='submit' className='btn'>Search</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-              </div>
-           </div>
+
+            <PhonesContainer phones={phones}></PhonesContainer>
         </div>
     );
 };

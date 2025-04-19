@@ -9,6 +9,7 @@ import About from '../pages/About/About';
 import Home from '../pages/Home/Home';
 import Cart from '../pages/Cart/Cart';
 import Favorites from '../pages/Favorites/Favorites';
+import PhoneDetails from '../pages/Root/PhoneDetails';
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,8 @@ export const router = createBrowserRouter([
       {
         index: true,
         path:'/',
+        hydrateFallbackElement:<p>Loading, Please wait</p>,
+        loader:()=>fetch('../phones.json'),
         Component:Home
       },
       {
@@ -32,6 +35,11 @@ export const router = createBrowserRouter([
       {
         path:'/favorites',
         Component:Favorites
+      },
+      {
+        path:'/phone-details/:id',
+        loader:()=>fetch('../phones.json'),
+        Component:PhoneDetails
       }
     ]
   }
