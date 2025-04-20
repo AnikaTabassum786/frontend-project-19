@@ -34,6 +34,7 @@ export const router = createBrowserRouter([
       },
       {
         path:'/favorites',
+        loader:()=>fetch('../phones.json'),
         Component:Favorites
       },
       {

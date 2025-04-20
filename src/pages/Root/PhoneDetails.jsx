@@ -1,5 +1,8 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import { FaShoppingCart } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
+import { addToStoreDB } from '../../utils/addToDB';
 
 const PhoneDetails = () => {
     const data = useLoaderData();
@@ -13,13 +16,23 @@ const PhoneDetails = () => {
 
     const {name,image,brand,model,storage,price,camera_info,description}= singlePhone
     console.log(price)
+
+    const handleMarkAsRead=(id)=>{
+      addToStoreDB(id)
+    }
+
+
     return (
         <div className='container mx-auto'>
-            <div className='flex justify-center items-center'>
+
+
+           <div className='flex justify-center items-center'>
                 <img src={image} alt="" />
             </div>
 
-            <div className='flex flex-col gap-4 justify-start mt-4'>
+           <div className='flex justify-between items-start'>
+
+           <div className='flex flex-col gap-4 justify-start mt-4'>
                 <div className='text-7xl'>
                   {name}
                 </div>
@@ -50,10 +63,17 @@ const PhoneDetails = () => {
                   <span className='text-xl font-bold'>Camera info:</span> {camera_info}
                 </div> 
 
-
-                
             </div>
-            
+
+            <div className='flex justify-center items-center gap-4 mt-4'>
+            <div> <button className='cursor-pointer'><FaShoppingCart></FaShoppingCart></button></div>
+            <div><button onClick={()=>handleMarkAsRead(id)} className='cursor-pointer'><FaBookmark></FaBookmark></button></div>
+            </div>
+             
+           </div>
+
+           
+          
         </div>
     );
 };
