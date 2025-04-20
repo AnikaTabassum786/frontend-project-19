@@ -23,4 +23,17 @@ const addToStoreDB = (id) => {
    }
 }
 
-export{getStorePhone,addToStoreDB}
+// const removePhone =(id)=>{
+//     const storePhoneData = getStorePhone();
+//     const remainingFavorites = storePhoneData.filter(phone => phone.id !== id)
+//     localStorage.setItem('favourite', JSON.stringify(remainingFavorites))
+   
+// }
+
+const removePhone = (id) => {
+    const storePhoneData = getStorePhone();
+    const remainingFavorites = storePhoneData.filter(phone => parseInt(phone) !== parseInt(id));
+    localStorage.setItem('favourite', JSON.stringify(remainingFavorites));
+};
+
+export{getStorePhone,addToStoreDB,removePhone}

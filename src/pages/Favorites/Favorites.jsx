@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router';
-import { getStorePhone } from '../../utils/addToDB';
+import { getStorePhone, removePhone } from '../../utils/addToDB';
 import PhoneCard from '../../components/PhoneCard';
+import { TbRuler } from 'react-icons/tb';
+import { SiTruenas } from 'react-icons/si';
 
 const Favorites = () => {
 
@@ -18,13 +20,28 @@ const Favorites = () => {
 
     },[])
 
+    if(fav.length<1){
+        return <div className='text-center mt-10 text-5xl'>Not selected</div>
+
+    }
+
+    // const handleDelete=(id)=>{
+    //     removePhone(id)
+    //     setfav(getStorePhone())
+    // }
+
+  const handleDelete = (id) => {
+    removePhone(id)
+    setfav(prev => prev.filter(phone => phone.id !== id))
+}
+
 
     return (
         <div className='container mx-auto'>
             Favorites
             <div className='grid grid-cols-3 gap-4'>
                 {
-                    fav.map(phone=><PhoneCard phone={phone}></PhoneCard>)
+                    fav.map(phone=><PhoneCard phone={phone} deleteable={true} handleDelete={handleDelete}></PhoneCard>)
                 }
             </div>
         </div>

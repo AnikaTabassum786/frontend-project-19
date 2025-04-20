@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router';
 import { FaShoppingCart } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
+import { CartContext } from '../../provider/Contexts';
 
 const Navbar = () => {
+    const {cart} = useContext(CartContext)
+    console.log(cart)
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm">
@@ -16,7 +19,7 @@ const Navbar = () => {
 
                     <NavLink className={({ isActive }) => isActive ? "active text-blue-400" : ""} to="/about">About</NavLink>
 
-                    <NavLink className={({ isActive }) => isActive ? "active text-blue-400" : ""} to="/cart"> <FaShoppingCart /> </NavLink>
+                    <NavLink className={({ isActive }) => isActive ? "active text-blue-400" : ""} to="/cart"> <FaShoppingCart  />{cart.length} </NavLink>
                     
                     <NavLink className={({ isActive }) => isActive ? "active text-blue-400" : ""} to="/favorites"><FaBookmark /></NavLink>
 

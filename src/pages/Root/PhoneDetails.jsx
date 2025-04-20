@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import { FaShoppingCart } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
 import { addToStoreDB } from '../../utils/addToDB';
+import { CartContext } from '../../provider/Contexts';
 
 const PhoneDetails = () => {
+
+    const {setCart} = useContext(CartContext)
     const data = useLoaderData();
     // console.log(data)
 
@@ -66,7 +69,7 @@ const PhoneDetails = () => {
             </div>
 
             <div className='flex justify-center items-center gap-4 mt-4'>
-            <div> <button className='cursor-pointer'><FaShoppingCart></FaShoppingCart></button></div>
+            <div> <button onClick={()=>setCart(prv=>[...prv,singlePhone])} className='cursor-pointer'><FaShoppingCart></FaShoppingCart></button></div>
             <div><button onClick={()=>handleMarkAsRead(id)} className='cursor-pointer'><FaBookmark></FaBookmark></button></div>
             </div>
              

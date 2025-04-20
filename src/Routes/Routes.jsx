@@ -39,6 +39,7 @@ export const router = createBrowserRouter([
       },
       {
         path:'/phone-details/:id',
+        hydrateFallbackElement:<p>Loading, Please wait</p>,
         loader:()=>fetch('../phones.json'),
         Component:PhoneDetails
       }
